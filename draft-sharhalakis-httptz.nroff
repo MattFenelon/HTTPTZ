@@ -112,6 +112,7 @@ Furthermore, this is also the case for all HTTP-like or HTTP based protocols tha
 
 This document addresses this need by describing a header to be used by HTTP [RFC2616] so that interested clients may provide their current timezone information to web servers and thus to web based applications.
 
+At the time of this writing GPS-enabled Internet access devices like mobile phones are being deployed.  In the near future, those devices may be able to use GPS information and properly adjust their timezone information.  This could be of great help for people that travel across timezones.
 At the time of this writting GPS-enabled Internet access devices like mobile phones are being deployed.  In the near future, those devices may be able to use GPS information and properly adjust their timezone information.  This could be of great help for people that travel accross timezones.
 
 .ti 0
