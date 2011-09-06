@@ -1,10 +1,11 @@
+ 
 
 
 
 Network Working Group                                      S. Harhalakis
 Internet-Draft                                       TEI of Thessaloniki
 Intended status: Experimental                              July 27, 2009
-Expires: January 28, 2010
+Expires: January 28, 2010                                               
 
 
                       Timezone Information in HTTP
@@ -49,7 +50,7 @@ Copyright Notice
 
 
 
-
+ 
 
 
 Harhalakis              Expires January 28, 2010                [Page 1]
@@ -60,8 +61,8 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 Abstract
 
    This document defines a HTTP header for clients to provide timezone
-   information to web servers.  An ABNF description of the corresponding
-   header is provided.
+   information to web servers, and a HTTP header for servers to provide
+   timezone information to intermediaries.
 
 
 
@@ -105,7 +106,7 @@ Abstract
 
 
 
-
+ 
 
 
 Harhalakis              Expires January 28, 2010                [Page 2]
@@ -115,9 +116,8 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 
 Discussion
 
-   Discussion about this document takes place in http-wg mailing list
-   (ietf-http-wg@w3.org).  Please CC v13@v13.gr too.
-
+   Discussion about this document takes place on the http-wg mailing
+   list (ietf-http-wg@w3.org).
 
 Table of Contents
 
@@ -128,18 +128,20 @@ Table of Contents
      1.4.  Considerations . . . . . . . . . . . . . . . . . . . . . .  5
    2.  Definition . . . . . . . . . . . . . . . . . . . . . . . . . .  7
      2.1.  Client support . . . . . . . . . . . . . . . . . . . . . .  7
-     2.2.  Server support . . . . . . . . . . . . . . . . . . . . . .  8
-     2.3.  Proxy considerations . . . . . . . . . . . . . . . . . . .  8
-   3.  Security Considerations  . . . . . . . . . . . . . . . . . . .  9
-     3.1.  Client side  . . . . . . . . . . . . . . . . . . . . . . .  9
-     3.2.  Server side  . . . . . . . . . . . . . . . . . . . . . . .  9
-   4.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 10
-   5.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 11
-   6.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 12
-     6.1.  Normative  . . . . . . . . . . . . . . . . . . . . . . . . 12
-     6.2.  Informative  . . . . . . . . . . . . . . . . . . . . . . . 12
-   Appendix A.  Examples  . . . . . . . . . . . . . . . . . . . . . . 13
-   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 14
+       2.1.1 Timezone names . . . . . . . . . . . . . . . . . . . . .  7
+       2.1.2 Timezone weighting . . . . . . . . . . . . . . . . . . .  7
+     2.2.  Server support . . . . . . . . . . . . . . . . . . . . . .  7
+     2.3.  Proxy considerations . . . . . . . . . . . . . . . . . . .  7
+   3.  Security Considerations  . . . . . . . . . . . . . . . . . . .  8
+     3.1.  Client side  . . . . . . . . . . . . . . . . . . . . . . .  8
+     3.2.  Server side  . . . . . . . . . . . . . . . . . . . . . . .  8
+   4.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . .  9
+   5.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 10
+   6.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+     6.1.  Normative  . . . . . . . . . . . . . . . . . . . . . . . . 11
+     6.2.  Informative  . . . . . . . . . . . . . . . . . . . . . . . 11
+   Appendix A.  Examples  . . . . . . . . . . . . . . . . . . . . . . 12
+   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 13
 
 
 
@@ -160,8 +162,7 @@ Table of Contents
 
 
 
-
-
+ 
 
 
 Harhalakis              Expires January 28, 2010                [Page 3]
@@ -194,11 +195,11 @@ Internet-Draft        Timezone Information in HTTP             July 2009
    current timezone information to web servers and thus to web based
    applications.
 
-   At the time of this writting GPS-enabled Internet access devices like
+   At the time of this writing GPS-enabled Internet access devices like
    mobile phones are being deployed.  In the near future, those devices
    may be able to use GPS information and properly adjust their timezone
    information.  This could be of great help for people that travel
-   accross timezones.
+   across timezones.
 
 1.2.  Requirements
 
@@ -217,7 +218,7 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 
    This document uses the following terms:
 
-
+ 
 
 
 Harhalakis              Expires January 28, 2010                [Page 4]
@@ -273,7 +274,7 @@ Internet-Draft        Timezone Information in HTTP             July 2009
    introduces a way for HTTP clients to provide:
 
 
-
+ 
 
 
 Harhalakis              Expires January 28, 2010                [Page 5]
@@ -329,7 +330,7 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 
 
 
-
+ 
 
 
 Harhalakis              Expires January 28, 2010                [Page 6]
@@ -341,110 +342,54 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 
 2.1.  Client support
 
-   HTTP clients MAY provide local timezone information to visiting web
-   sites.  This information is sent using the client-timezone HTTP
-   header:
+   HTTP clients MAY provide local timezone information to servers.  This
+   information is sent using the client-timezone HTTP header:
 
+        Accept-Timezone = 1#( tzid [ OWS ";" OWS "q=" qvalue ] ) tzid =
+        <Timezone identifier, defined in [TZDB]>
 
-      client-timezone  =  "Timezone" ":" tzdescr
+qvalue = need to define this somewhere (see
+http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-16#section-
+6.4)
 
-      tzdescr          =  rfctime [ ";" posixtz [ ";" tznames ] ]
+2.1.1 Timezone names
 
-      rfctime          =  <local time>
+One or more timezone identifiers (TZIDs) can be specified from the TZ
+Database.
 
-      posixtz          =  <a POSIX 1003.1 timezone string>
+If an Accept-Timezone header is not present, the server should assume
+that all timezones are acceptable.
 
-      tznames          =  tzname *( "," tzname )
+2.1.2 Timezone weighting
 
-      tzname           =  <a timezone string from a timezone database>
+Each TZID can be given an associated quality attribute value that
+represents an estimate of the user's preference for the timezone
+specified by that. Quality values are in relation to each other, ranging
+from 1, most preferred to 0, least preferred. The quality value defaults
+to "q=1".
 
-   Where:
-
-   rfctime    A local time string as specified in [RFC3339].  It
-              includes the current time offset.
-
-   posixtz    A POSIX 1003.1 timezone string as specified in [POSIXTZ].
-
-   tzname     A timezone name.  Many systems use a timezone name from a
-              timezone database.  This is one such string.  More than
-              one such strings may be provided.  All of them MUST
-              identify the same timezone.
-
-   HTTP clients SHOULD provide all three parts of the header unless they
-   aren't able to do so or they are configured not to send timezone
-   information.
-
-   If a client does not provide a part of the header and there is
-   another part following that is provided, the client MUST use the
-   empty string for the part that is not provided.
-
-   Clients that don't have a clock source MUST use zeroes for all digits
-   of the datetime string except from the offset.  "Z" MUST by used when
-   the offset is also unavailable.
-
-   When multiple references to timezone databases are specified the
-   server-side SHOULD perform a left-to-right search.  This means that
-   the server-side application first searches its database for the first
-
-
-
-Harhalakis              Expires January 28, 2010                [Page 7]
-
-Internet-Draft        Timezone Information in HTTP             July 2009
-
-
-   provided timezone.  If the search fails the search continues for the
-   second timezone, etc.  The search ends when a matching entry is found
-   or there is no provided timezone database reference to search for.
-   The client side MUST assume that the server side uses this search
-   method.
+-- This needs expansion --
 
 2.2.  Server support
 
-   Compliant servers MAY validate the format of the provided
-   information.  Timezone strings that are not in a valid format MAY not
-   be accepted.  Validation checks MUST NOT be performed on the content
-   of the Timezone string by servers.  Only the format of the string may
-   be checked.  This way outdated servers will not filter out proper
-   information.
+Compliant servers MAY validate the format of the provided information. 
+Timezone strings that are not in a valid format MAY not be accepted. 
+Validation checks MUST NOT be performed on the content of the Timezone
+string by servers.  Only the format of the string may be checked.  This
+way outdated servers will not filter out proper information.
 
 2.3.  Proxy considerations
 
-   HTTP proxy servers MUST NOT alter this information.  HTTP proxy
-   servers MUST follow the same validation policy that was specified for
-   servers.
+HTTP proxy servers MUST NOT alter this information.  HTTP proxy servers
+MUST follow the same validation policy that was specified for servers.
 
-   Server side scripts that produce customized results based on the
-   timezone information MUST return an appropriate "Vary" header as
-   specified in paragraph 14.44 of [RFC2616].
-
-
+Server side scripts that produce customized results based on the
+timezone information MUST return an appropriate "Vary" header as
+specified in paragraph 14.44 of [RFC2616].
+ 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Harhalakis              Expires January 28, 2010                [Page 8]
+Harhalakis              Expires January 28, 2010                [Page 7]
 
 Internet-Draft        Timezone Information in HTTP             July 2009
 
@@ -453,22 +398,75 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 
 3.1.  Client side
 
-   Timezone information may consist personal information regarding the
-   location of a person.  HTTP clients MUST NOT provide this information
-   without letting the user prevent it.  Clients must either ask users
-   or provide an option to enable/disable this feature.  The later is
-   RECOMMENDED.
+Timezone information may consist personal information regarding the
+location of a person.  HTTP clients MUST NOT provide this information
+without letting the user prevent it.  Clients must either ask users or
+provide an option to enable/disable this feature.  The later is
+RECOMMENDED.
 
-   In most cases Timezone information will not disclose more personal
-   information than an IP address.  HTTP clients MAY default in enabling
-   this to improve user experience.  It is also possible that client
-   behavior regarding timezone information disclosure be controlled by
-   implicit privacy settings.
+In most cases Timezone information will not disclose more personal
+information than an IP address.  HTTP clients MAY default in enabling
+this to improve user experience.  It is also possible that client
+behavior regarding timezone information disclosure be controlled by
+implicit privacy settings.
 
 3.2.  Server side
 
-   Web based applications MUST treat this information as user input that
-   may be invalid or malicious.
+Web based applications MUST treat this information as user input that
+may be invalid or malicious.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+Harhalakis              Expires January 28, 2010                [Page 8]
+
+Internet-Draft        Timezone Information in HTTP             July 2009
+
+
+4.  IANA Considerations
+
+This specification requires registration of a Message Header Field for
+HTTP [RFC3864].
+
+Header field:  Timezone
+
+Applicable protocol:  HTTP
+
+Status:  Experimental
+
+Author/change controller:
+    IETF (iesg@ietf.org)
+    Internet Engineering Task Force
+
+Specification document:
+    [ this document ]
 
 
 
@@ -498,6 +496,9 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 
 
 
+
+
+ 
 
 
 Harhalakis              Expires January 28, 2010                [Page 9]
@@ -505,23 +506,18 @@ Harhalakis              Expires January 28, 2010                [Page 9]
 Internet-Draft        Timezone Information in HTTP             July 2009
 
 
-4.  IANA Considerations
+5.  Acknowledgements
 
-   This specification requires registration of a Message Header Field
-   for HTTP [RFC3864].
+Timezone information in HTTP was also proposed by David Robinson in an
+email at HTTP Working Group back in 1995 but the replies he got were
+negative.  It was believed that timezone information should be handled
+by CGI scripts and not by the Hypertext Transfer Protocol. The
+discussion can be found at http-wg mailing list archives: <http:/
+/www.hpl.hp.com/personal/ange/archives/archives-95/http-wg-archive/
+0521.html>.
 
-   Header field:  Timezone
-
-   Applicable protocol:  HTTP
-
-   Status:  Experimental
-
-   Author/change controller:
-       IETF (iesg@ietf.org)
-       Internet Engineering Task Force
-
-   Specification document:
-       [ this document ]
+This document was properly formed thanks to the remarks of Julian
+Reschke.
 
 
 
@@ -554,65 +550,14 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 
 
 
+
+
+
+
+ 
 
 
 Harhalakis              Expires January 28, 2010               [Page 10]
-
-Internet-Draft        Timezone Information in HTTP             July 2009
-
-
-5.  Acknowledgements
-
-   Timezone information in HTTP was also proposed by David Robinson in
-   an email at HTTP Working Group back in 1995 but the replies he got
-   were negative.  It was believed that timezone information should be
-   handled by CGI scripts and not by the Hypertext Transfer Protocol.
-   The discussion can be found at http-wg mailing list archives: <http:/
-   /www.hpl.hp.com/personal/ange/archives/archives-95/http-wg-archive/
-   0521.html>.
-
-   This document was properly formed thanks to the remarks of Julian
-   Reschke.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Harhalakis              Expires January 28, 2010               [Page 11]
 
 Internet-Draft        Timezone Information in HTTP             July 2009
 
@@ -622,20 +567,24 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 6.1.  Normative
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, March 1997.
+   Requirement Levels", BCP 14, RFC 2119, March 1997.
 
    [RFC2616]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
-              Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
-              Transfer Protocol -- HTTP/1.1", RFC 2616, June 1999.
+   Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext Transfer
+   Protocol -- HTTP/1.1", RFC 2616, June 1999.
 
    [RFC3339]  Klyne, G., Ed. and C. Newman, "Date and Time on the
-              Internet: Timestamps", RFC 3339, July 2002.
+   Internet: Timestamps", RFC 3339, July 2002.
 
    [RFC3864]  Klyne, G., Nottingham, M., and J. Mogul, "Registration
-              Procedures for Message Header Fields", BCP 90, RFC 3864,
-              September 2004.
+   Procedures for Message Header Fields", BCP 90, RFC 3864, September
+   2004.
 
    [POSIXTZ]  IEEE, The Open Group, "IEEE Std 1003.1", 2004.
+
+   [TZDB]     Eggert, P. and A. Olson, "Sources for Time Zone and
+              Daylight Saving Time Data",
+              <http://www.twinsun.com/tz/tz-link.htm>.
 
 6.2.  Informative
 
@@ -661,14 +610,10 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 
 
 
+ 
 
 
-
-
-
-
-
-Harhalakis              Expires January 28, 2010               [Page 12]
+Harhalakis              Expires January 28, 2010               [Page 11]
 
 Internet-Draft        Timezone Information in HTTP             July 2009
 
@@ -721,10 +666,10 @@ Appendix A.  Examples
 
 
 
+ 
 
 
-
-Harhalakis              Expires January 28, 2010               [Page 13]
+Harhalakis              Expires January 28, 2010               [Page 12]
 
 Internet-Draft        Timezone Information in HTTP             July 2009
 
@@ -780,5 +725,4 @@ Author's Address
 
 
 
-Harhalakis              Expires January 28, 2010               [Page 14]
-
+Harhalakis              Expires January 28, 2010               [Page 13]
