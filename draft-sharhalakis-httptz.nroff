@@ -236,14 +236,13 @@ If an Accept-Timezone header is not present, the server should assume that all t
 .ti 0
 2.1.1.1 Timezone weighting
 
+Each TZID MAY be given an associated quality attribute value (as defined in Section 3.9 of [RFC2616]), which represents the preference for that timezone. The default value is q=1. For example,
 Each TZID can be given an associated quality attribute value as a short "floating point" number to indicate its relative importance ("weight").  A weight is normalized to a real number in the range 0 through 1, where 0 is the minimum and 1 the maximum value.  If a parameter has a quality value of 0, then content with this parameter is "not acceptable" for the client.  HTTP/1.1 applications MUST NOT generate more than three digits after the decimal point.  User configuration of these values SHOULD also be limited in this fashion.
 
-.in 3
-qvalue         = ( "0" [ "." 0*3DIGIT ] )
-               / ( "1" [ "." 0*3("0") ] )
+.ti 2
+Accept-Timezone: Europe/London, Etc/GMT;q=0.9
 
-Note: "Quality values" is a misnomer, since these values merely
-represent relative degradation in desired quality.
+would mean "I prefer GMT, but will accept UTC".
 
 See:
 http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-16#section-6.4
