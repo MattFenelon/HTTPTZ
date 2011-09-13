@@ -224,7 +224,7 @@ Another consideration is the validity of client-side time or timezone informatio
 2.1.  Accept-Timezone
 
 .in 0
-The "Accept-Timezone" header field can be used by user agents to indicate a set of timezones that date and times are preferred to be represented as in a response payload.
+The "Accept-Timezone" header field can be used by user agents to indicate that dates and times, in a response payload, could be represented as points in time local to a set of preferred timezones.
 
 .in 8
 Accept-Timezone = 1#( tzid [ OWS ";" OWS "q=" qvalue ] )
