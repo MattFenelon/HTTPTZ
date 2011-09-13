@@ -72,12 +72,11 @@ Table of Contents
      1.2. Syntax Notation . . . . . . . . . . . . . . . . . . . . . .  4
        1.2.1. ABNF Extension: #rule . . . . . . . . . . . . . . . . .  5
      1.3.  Terminology  . . . . . . . . . . . . . . . . . . . . . . .  5
-     1.3.  Terminology  . . . . . . . . . . . . . . . . . . . . . . .  4
      1.4.  Considerations . . . . . . . . . . . . . . . . . . . . . .  5
-   2.  Definition . . . . . . . . . . . . . . . . . . . . . . . . . .  7
-     2.1.  Client support . . . . . . . . . . . . . . . . . . . . . .  7
-       2.1.1 Timezone names . . . . . . . . . . . . . . . . . . . . .  7
-         2.1.1.1 Timezone weighting . . . . . . . . . . . . . . . . .  7
+   2.  Definition . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+     2.1.  Accept-Timezone  . . . . . . . . . . . . . . . . . . . . .  8
+       2.1.1 Timezone names . . . . . . . . . . . . . . . . . . . . .  8
+         2.1.1.1 Timezone weighting . . . . . . . . . . . . . . . . .  8
      2.2.  Server support . . . . . . . . . . . . . . . . . . . . . .  8
      2.3.  Proxy considerations . . . . . . . . . . . . . . . . . . .  8
    3.  Security Considerations  . . . . . . . . . . . . . . . . . . .  9
@@ -223,7 +222,6 @@ Another consideration is the validity of client-side time or timezone informatio
 
 .ti 0
 2.1.  Accept-Timezone
-2.1.  Client support
 
 .in 0
 The "Accept-Timezone" header field can be used by user agents to indicate a set of timezones that date and times are preferred to be represented as in a response payload.
@@ -232,13 +230,6 @@ The "Accept-Timezone" header field can be used by user agents to indicate a set 
 Accept-Timezone = 1#( tzid [ OWS ";" OWS "q=" qvalue ] )
 tzid = <Timezone identifier, defined in [TZDB]>
 .in 0
-
-References:
-(How to refer to these?)
-
-OWS and # are both in http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-16#section-1.2
-
-qvalue = need to define this somewhere (see http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-16#section-6.4)
 
 .ti 0
 2.1.1 Timezone names
@@ -253,15 +244,12 @@ If an Accept-Timezone header is not present, the server should assume that all t
 2.1.1.1 Timezone weighting
 
 Each TZID MAY be given an associated quality attribute value (as defined in Section 3.9 of [RFC2616]), which represents the preference for that timezone. The default value is q=1. For example,
-Each TZID can be given an associated quality attribute value as a short "floating point" number to indicate its relative importance ("weight").  A weight is normalized to a real number in the range 0 through 1, where 0 is the minimum and 1 the maximum value.  If a parameter has a quality value of 0, then content with this parameter is "not acceptable" for the client.  HTTP/1.1 applications MUST NOT generate more than three digits after the decimal point.  User configuration of these values SHOULD also be limited in this fashion.
 
 .ti 2
 Accept-Timezone: Europe/London, Etc/GMT;q=0.9
 
 would mean "I prefer GMT, but will accept UTC".
 
-See:
-http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-16#section-6.4
 .in 0
 
 .ti 0
