@@ -79,16 +79,16 @@ Table of Contents
          2.1.1.1 Timezone weighting . . . . . . . . . . . . . . . . .  8
      2.2.  Server support . . . . . . . . . . . . . . . . . . . . . .  8
      2.3.  Proxy considerations . . . . . . . . . . . . . . . . . . .  8
-   3.  Security Considerations  . . . . . . . . . . . . . . . . . . .  9
-     3.1.  Client side  . . . . . . . . . . . . . . . . . . . . . . .  9
-     3.2.  Server side  . . . . . . . . . . . . . . . . . . . . . . .  9
-   4.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 10
-   5.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 11
-   6.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 12
-     6.1.  Normative  . . . . . . . . . . . . . . . . . . . . . . . . 12
-     6.2.  Informative  . . . . . . . . . . . . . . . . . . . . . . . 12
-   Appendix A.  Examples  . . . . . . . . . . . . . . . . . . . . . . 13
-   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 14
+   3.  Security Considerations  . . . . . . . . . . . . . . . . . . . 10
+     3.1.  Client side  . . . . . . . . . . . . . . . . . . . . . . . 10
+     3.2.  Server side  . . . . . . . . . . . . . . . . . . . . . . . 10
+   4.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 11
+   5.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 12
+   6.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+     6.1.  Normative  . . . . . . . . . . . . . . . . . . . . . . . . 13
+     6.2.  Informative  . . . . . . . . . . . . . . . . . . . . . . . 13
+   Appendix A.  Examples  . . . . . . . . . . . . . . . . . . . . . . 14
+   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 15
 .fi
 .in 3
 
@@ -226,9 +226,10 @@ Another consideration is the validity of client-side time or timezone informatio
 .in 0
 The "Accept-Timezone" header field can be used by user agents to indicate that dates and times, in a response payload, could be represented as points in time local to a set of preferred timezones.
 
-.in 8
+.in 2
 Accept-Timezone = 1#( tzid [ OWS ";" OWS "q=" qvalue ] )
-tzid = <Timezone identifier, defined in [TZDB]>
+
+tzid            = <Timezone identifier, defined in [TZDB]>
 .in 0
 
 .ti 0
@@ -243,10 +244,10 @@ If an Accept-Timezone header is not present, the server should assume that all t
 .ti 0
 2.1.1.1 Timezone weighting
 
-Each TZID MAY be given an associated quality attribute value (as defined in Section 3.9 of [RFC2616]), which represents the preference for that timezone. The default value is q=1. For example,
+Each timezone identifier MAY be given an associated quality attribute value (as defined in Section 3.9 of [RFC2616]), which represents the preference for that timezone. The default value is q=1. For example,
 
 .ti 2
-Accept-Timezone: Europe/London, Etc/GMT;q=0.9
+Accept-Timezone: Europe/London, Etc/GMT;q=0.5
 
 would mean "I prefer GMT, but will accept UTC".
 
