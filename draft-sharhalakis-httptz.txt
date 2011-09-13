@@ -129,19 +129,19 @@ Table of Contents
    2.  Definition . . . . . . . . . . . . . . . . . . . . . . . . . .  7
      2.1.  Client support . . . . . . . . . . . . . . . . . . . . . .  7
        2.1.1 Timezone names . . . . . . . . . . . . . . . . . . . . .  7
-       2.1.2 Timezone weighting . . . . . . . . . . . . . . . . . . .  7
-     2.2.  Server support . . . . . . . . . . . . . . . . . . . . . .  7
-     2.3.  Proxy considerations . . . . . . . . . . . . . . . . . . .  7
-   3.  Security Considerations  . . . . . . . . . . . . . . . . . . .  8
-     3.1.  Client side  . . . . . . . . . . . . . . . . . . . . . . .  8
-     3.2.  Server side  . . . . . . . . . . . . . . . . . . . . . . .  8
-   4.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . .  9
-   5.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 10
-   6.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 11
-     6.1.  Normative  . . . . . . . . . . . . . . . . . . . . . . . . 11
-     6.2.  Informative  . . . . . . . . . . . . . . . . . . . . . . . 11
-   Appendix A.  Examples  . . . . . . . . . . . . . . . . . . . . . . 12
-   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 13
+         2.1.1.1 Timezone weighting . . . . . . . . . . . . . . . . .  7
+     2.2.  Server support . . . . . . . . . . . . . . . . . . . . . .  8
+     2.3.  Proxy considerations . . . . . . . . . . . . . . . . . . .  8
+   3.  Security Considerations  . . . . . . . . . . . . . . . . . . .  9
+     3.1.  Client side  . . . . . . . . . . . . . . . . . . . . . . .  9
+     3.2.  Server side  . . . . . . . . . . . . . . . . . . . . . . .  9
+   4.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 10
+   5.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 11
+   6.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+     6.1.  Normative  . . . . . . . . . . . . . . . . . . . . . . . . 12
+     6.2.  Informative  . . . . . . . . . . . . . . . . . . . . . . . 12
+   Appendix A.  Examples  . . . . . . . . . . . . . . . . . . . . . . 13
+   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 14
 
 
 
@@ -342,11 +342,17 @@ Internet-Draft        Timezone Information in HTTP             July 2009
 
 2.1.  Client support
 
-   HTTP clients MAY provide local timezone information to servers.  This
-   information is sent using the client-timezone HTTP header:
+The "Accept-Timezone" header field can be used by user agents to
+indicate a set of timezones that date and times are preferred to be
+represented as in a response payload.
 
         Accept-Timezone = 1#( tzid [ OWS ";" OWS "q=" qvalue ] ) tzid =
         <Timezone identifier, defined in [TZDB]>
+
+References: (How to refer to these?)
+
+OWS and # are both in http://tools.ietf.org/html/draft-ietf-httpbis-p1-
+messaging-16#section-1.2
 
 qvalue = need to define this somewhere (see
 http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-16#section-
@@ -354,21 +360,41 @@ http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-16#section-
 
 2.1.1 Timezone names
 
-One or more timezone identifiers (TZIDs) can be specified from the TZ
-Database.
+One or more timezone identifiers can be specified from the TZ Database.
+
+If the Accept-Timezone header is present at least one TZID must be
+specified.
 
 If an Accept-Timezone header is not present, the server should assume
 that all timezones are acceptable.
 
-2.1.2 Timezone weighting
+2.1.1.1 Timezone weighting
 
-Each TZID can be given an associated quality attribute value that
-represents an estimate of the user's preference for the timezone
-specified by that. Quality values are in relation to each other, ranging
-from 1, most preferred to 0, least preferred. The quality value defaults
-to "q=1".
+Each TZID can be given an associated quality attribute value as a short
+"floating point" number to indicate its relative importance ("weight"). 
+A weight is normalized to a real number in the range 0 through 1, where
+0 is the minimum and 1 the maximum value.  If a parameter has a quality
+value of 0, then content with this parameter is "not acceptable" for the
+client.  HTTP/1.1 applications MUST NOT generate more than three digits
+after the decimal point.  User configuration of these values SHOULD also
+be limited in this fashion.
 
--- This needs expansion --
+   qvalue         = ( "0" [ "." 0*3DIGIT ] )               / ( "1" [ "."
+   0*3("0") ] )
+
+   Note: "Quality values" is a misnomer, since these values merely
+   represent relative degradation in desired quality.
+
+   See: http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-
+ 
+
+
+Harhalakis              Expires January 28, 2010                [Page 7]
+
+Internet-Draft        Timezone Information in HTTP             July 2009
+
+
+   16#section-6.4
 
 2.2.  Server support
 
@@ -386,10 +412,40 @@ MUST follow the same validation policy that was specified for servers.
 Server side scripts that produce customized results based on the
 timezone information MUST return an appropriate "Vary" header as
 specified in paragraph 14.44 of [RFC2616].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
 
 
-Harhalakis              Expires January 28, 2010                [Page 7]
+Harhalakis              Expires January 28, 2010                [Page 8]
 
 Internet-Draft        Timezone Information in HTTP             July 2009
 
@@ -445,7 +501,7 @@ may be invalid or malicious.
  
 
 
-Harhalakis              Expires January 28, 2010                [Page 8]
+Harhalakis              Expires January 28, 2010                [Page 9]
 
 Internet-Draft        Timezone Information in HTTP             July 2009
 
@@ -501,7 +557,7 @@ Specification document:
  
 
 
-Harhalakis              Expires January 28, 2010                [Page 9]
+Harhalakis              Expires January 28, 2010               [Page 10]
 
 Internet-Draft        Timezone Information in HTTP             July 2009
 
@@ -557,7 +613,7 @@ Reschke.
  
 
 
-Harhalakis              Expires January 28, 2010               [Page 10]
+Harhalakis              Expires January 28, 2010               [Page 11]
 
 Internet-Draft        Timezone Information in HTTP             July 2009
 
@@ -613,7 +669,7 @@ Internet-Draft        Timezone Information in HTTP             July 2009
  
 
 
-Harhalakis              Expires January 28, 2010               [Page 11]
+Harhalakis              Expires January 28, 2010               [Page 12]
 
 Internet-Draft        Timezone Information in HTTP             July 2009
 
@@ -669,7 +725,7 @@ Appendix A.  Examples
  
 
 
-Harhalakis              Expires January 28, 2010               [Page 12]
+Harhalakis              Expires January 28, 2010               [Page 13]
 
 Internet-Draft        Timezone Information in HTTP             July 2009
 
@@ -725,4 +781,4 @@ Author's Address
 
 
 
-Harhalakis              Expires January 28, 2010               [Page 13]
+Harhalakis              Expires January 28, 2010               [Page 14]
