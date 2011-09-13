@@ -207,6 +207,7 @@ Another consideration is the validity of client-side time or timezone informatio
 2.  Definition
 
 .ti 0
+2.1.  Accept-Timezone
 2.1.  Client support
 
 .in 0
