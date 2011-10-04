@@ -5,29 +5,29 @@
 .lt 7.2i
 .nr LL 7.2i
 .nr LT 7.2i
-.ds LF Harhalakis
+.ds LF Fenelon
 .ds RF FORMFEED[Page %]
 .ds LH Internet-Draft
-.ds RH July 2009
+.ds RH <Month of publication>
 .ds CH Timezone Information in HTTP
-.ds CF Expires January 28, 2010
+.ds CF Expires TBD
 .hy 0
 .nh
 .ad l
 .in 0
 
 .nf
-.tl 'Network Working Group''S. Harhalakis'
-.tl '\%Internet-Draft''TEI of Thessaloniki'
-.tl 'Intended status: Experimental''July 27, 2009'
-.tl 'Expires: January 28, 2010'''
+.tl 'Network Working Group''M. Fenelon'
+.tl '\%Internet-Draft''Huddle'
+.tl 'Intended status: Experimental''<Todays date - to be added>'
+.tl 'Expires: ?'''
 .fi
 .in 3
 
 
 .ce 2
 Timezone Information in HTTP
-\%draft-sharhalakis-httptz-05.txt
+\%draft-fenelon-httptz-01.txt
 
 .ti 0
 Status of this Memo
