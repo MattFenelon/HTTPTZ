@@ -303,11 +303,9 @@ Specification document:
 5.  Acknowledgements
 
 .fi
-Timezone information in HTTP was also proposed by David Robinson in an email at HTTP Working Group back in 1995 but the replies he got were negative.  It was believed that timezone information should be handled by CGI scripts and not by the Hypertext Transfer Protocol. The discussion can be found at http-wg mailing list archives: <http:/ \%/www.hpl.hp.com/personal/ange/archives/archives-95/http-wg-archive/ 0521.html>.
+Timezone information in HTTP was also proposed by David Robinson in an email at HTTP Working Group back in 1995 but the replies he got were negative.  It was believed that timezone information should be handled by CGI scripts and not by the Hypertext Transfer Protocol. The discussion can be found at http-wg mailing list archives: <http://www.hpl.hp.com/personal/ange/archives/archives-95/http-wg-archive/ 0521.html>.
 
-This document was properly formed thanks to the remarks of Julian Reschke.
-
-http://www.w3.org/TR/timezone/
+Stefanos Harhalakis originally proposed a timezone header for HTTP as an Internet Draft (http://tools.ietf.org/html/draft-sharhalakis-httptz), on which this work is based.
 
 .bp
 .ti 0
