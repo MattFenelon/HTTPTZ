@@ -19,8 +19,8 @@
 .nf
 .tl 'Network Working Group''M. Fenelon'
 .tl '\%Internet-Draft''Huddle'
-.tl 'Intended status: Experimental''<Todays date - to be added>'
-.tl 'Expires: ?'''
+.tl 'Intended status: Experimental''<Todays date>'
+.tl 'Expires: TBD'''
 .fi
 .in 3
 
@@ -47,7 +47,7 @@ The list of current Internet-Drafts can be accessed at \%http://www.ietf.org/iet
 
 The list of Internet-Draft Shadow Directories can be accessed at http://www.ietf.org/shadow.html.
 
-This Internet-Draft will expire on January 28, 2010.
+This Internet-Draft will expire on TBD.
 
 .ti 0
 Copyright Notice
