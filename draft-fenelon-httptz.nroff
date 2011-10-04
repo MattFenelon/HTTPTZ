@@ -102,7 +102,7 @@ Table of Contents
 1.1.  Purpose
 
 .fi
-Many web based applications could benefit from knowing the timezone of their visiting clients.  Most of the dynamic content provider applications depend on user accounts to display time and date in the client's native timezone.  This is a common problem and the current solution is not always possible or adequate for reasons inlcuding:
+Many web based applications could benefit from knowing the timezone of their visiting clients.  Most of the dynamic content provider applications depend on user accounts to display time and date in the client's native timezone.  This is a common problem and the current solution is not always possible or adequate for reasons including:
 
 .in 6
 .ti 3
