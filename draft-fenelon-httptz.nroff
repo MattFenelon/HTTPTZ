@@ -9,7 +9,7 @@
 .ds RF FORMFEED[Page %]
 .ds LH Internet-Draft
 .ds RH <Month of publication>
-.ds CH Timezone Information in HTTP
+.ds CH HTTP Timezone Headers
 .ds CF Expires TBD
 .hy 0
 .nh
@@ -26,7 +26,7 @@
 
 
 .ce 2
-Timezone Information in HTTP
+HTTP Timezone Headers
 \%draft-fenelon-httptz-01.txt
 
 .ti 0
