@@ -244,12 +244,12 @@ If an Accept-Timezone header is not present, the server should assume that all t
 .ti 0
 2.1.1.1 Timezone weighting
 
-Each timezone identifier MAY be given an associated quality attribute value (as defined in Section 3.9 of [RFC2616]), which represents the preference for that timezone. The default value is q=1. For example,
+Each timezone identifier MAY be given an associated quality attribute value (as defined in Section 3.9 of [RFC2616]) that represents the preference for that timezone. The default value is q=1. For example,
 
 .ti 2
-Accept-Timezone: Europe/London, Etc/GMT;q=0.5
+Accept-Timezone: Europe/London, Etc/UTC;q=0.5
 
-would mean "I prefer GMT, but will accept UTC".
+should be read as "I prefer 'London, UK' time, but will accept UTC".
 
 .in 0
 
