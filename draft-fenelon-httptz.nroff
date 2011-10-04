@@ -120,44 +120,15 @@ This document specifies a HTTP header that can be used to give a visitor control
 A second header is specified to inform clients and intermediaries that the content of a response has been modified per a particular timezone.
 
 .ti 0
-1.2.  Requirements
+2.  Notational Conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC2119].
 
 An implementation is not compliant if it fails to satisfy one or more of the MUST or REQUIRED level requirements.  An implementation that satisfies all the MUST or REQUIRED level and all the SHOULD level requirements is said to be "unconditionally compliant"; one that satisfies all the MUST level requirements but not all the SHOULD level requirements is said to be "conditionally compliant".
 
-.ti 0
-1.2. Syntax Notation
+This specification uses the Augmented Backus-Naur Form (ABNF) notation of [RFC2616].
 
-This specification uses the Augmented Backus-Naur Form (ABNF) notation of [RFC5234].
-
-The following core rules are included by reference, as defined in [RFC5234], Appendix B.1: ALPHA (letters), CR (carriage return), CRLF (CR LF), CTL (controls), DIGIT (decimal 0-9), DQUOTE (double quote), HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed), OCTET (any 8-bit sequence of data), SP (space), VCHAR (any visible [USASCII] character), and WSP (whitespace).
-
-.ti 0
-1.2.1. ABNF Extension: #rule
-
-This specification uses the #rule as specified in Section 2.1 of [RFC2616].
-
-.ti 0
-1.3.  Terminology
-
-This document uses the following terms:
-
-
-.nf
-HTTP client
-   Every client of the HTTP protocol.  Commonly referred to as a web
-   browser.
-
-Timezone string
-   A timezone string as described in this document.
-
-HTTP header
-   An HTTP header as described in [RFC2616].
-
-.fi
-The HTTP header specification of this document is presented in the augmented Backus-Naur Form that is described in [RFC2616].
-
+Additionally, this specification uses the #rule as specified in Section 2.1 of [RFC2616].
 
 .bp
 
